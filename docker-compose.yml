@@ -1,0 +1,27 @@
+version: '3'
+services:
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-pro:7.4.3
+    container_name: artifactory
+    networks:
+      - artifactorynet
+    ports:
+      - '80:8082'
+    volumes:
+     - ./var:/var/opt/jfrog/artifactory
+     - /etc/localtime:/etc/localtime:ro
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "10"
+
+networks:
+  artifactorynet:
+    driver: bridge
