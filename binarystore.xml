@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config version="2">
+    <chain>
+        <provider type="cache-fs" id="cache-fs">
+            <provider type="eventual" id="eventual">
+                <provider type="retry" id="retry-s3">
+                    <provider type="s3" id="s3"/>
+                </provider>
+            </provider>
+        </provider>
+    </chain>
+    <provider type="s3" id="s3">
+        <bucketName>artifactory</bucketName>
+        <endpoint>http://internal-s3-host</endpoint>
+        <credential>...</credential>
+        <httpsOnly>false</httpsOnly>
+        <identity>...</identity>
+        <property name="s3service.disable-dns-buckets" value="true"/>
+    </provider>
+</config>
